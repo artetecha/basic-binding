@@ -1,7 +1,7 @@
 {
   "name": "basic-binding",
   "version": "0.0.2",
-  "description": "A basic GraphQL binding implementation that will work with most GraphQL server.",
+  "description": "A basic GraphQL binding implementation that will work with most GraphQL servers.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [

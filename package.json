@@ -1,0 +1,43 @@
+{
+  "name": "basic-binding",
+  "version": "0.0.2",
+  "description": "A basic GraphQL binding implementation that will work with most GraphQL server.",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "repository": "https://github.com/artetecha/basic-binding",
+  "author": "Vincenzo Russo (v@artetecha.com)",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "prepublish": "yarn build",
+    "build": "rm -rf dist && tsc -d",
+    "lint": "tslint --project tsconfig.json {src,test}/**/*.ts && prettier-check --ignore-path .gitignore {src,.}/{*.ts,*.js}",
+    "format": "prettier --write --ignore-path .gitignore {src,.}/{*.ts,*.js}"
+  },
+  "release": {
+    "branch": "master"
+  },
+  "dependencies": {
+    "apollo-link-http": "^1.5.5",
+    "graphql-binding": "^2.2.5",
+    "graphql-import": "^0.7.1",
+    "graphql-tools": "^4.0.0",
+    "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.2",
+    "@types/node": "^10.11.7",
+    "prettier": "^1.14.2",
+    "prettier-check": "^2.0.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-config-standard": "^8.0.0",
+    "typescript": "^3.1.3"
+  },
+  "peerDependencies": {
+    "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0"
+  }
+}

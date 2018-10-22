@@ -1,0 +1,24 @@
+{
+  "name": "postgraphile",
+  "version": "0.0.2",
+  "description": "Postgraphile example",
+  "main": "index.js",
+  "repository": "https://github.com/artetecha/basic-binding",
+  "author": "Vincenzo Russo (v@artetecha.com)",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "prestart": "postgraphile -c postgres://media:media@localhost:5555/media --simple-collections both --graphql /media --legacy-relations omit --watch --export-schema-graphql schema/pg.graphql &",
+    "start": "PORT=5005 node index.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "@britishcouncil/grizzly": "^0.2.1",
+    "basic-binding": "^0.0.2",
+    "faker": "^4.1.0",
+    "graphql": "^0.13.2",
+    "graphql-middleware": "^1.7.8",
+    "graphql-shield": "^3.2.5",
+    "postgraphile": "^4.0.1"
+  }
+}

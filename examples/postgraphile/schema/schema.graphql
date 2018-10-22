@@ -1,0 +1,5 @@
+# import Query.*, Mutation.* from 'pg.graphql'
+
+type Query {
+  helloWorld: String
+}

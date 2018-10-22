@@ -1,0 +1,19 @@
+name: media
+
+services:
+  db:
+    type: postgres
+    install_dependencies_as_root:
+      - apt-get update
+      - apt-get install sudo
+      - adduser www-data sudo
+      - echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    install_dependencies_as_me:
+      - echo "db:5432:media:media:media" > ~/.pgpass
+    run:
+      - '[ ! -e "$HOME/.schema-imported" ] && psql -d media -U media < /app/db/schema.sql && touch "$HOME/.schema-imported"'
+    portforward: 5555
+    creds:
+      user: media
+      password: media
+      database: media

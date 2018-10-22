@@ -2,7 +2,7 @@
 
 This example shows how to use `basic-binding` with [PostGraphile](https://github.com/graphile/postgraphile).
 
-## Before you start
+## Before you start
 
 _PostGraphile_ needs a PostgreSQL server to connect to. In this repository I provide a dockerised PostgreSQL exposing a database created off a simple schema (see `db/schema.sql`). In order to build and run that container you will need [Lando](https://docs.devwithlando.io/) (at least `v3.0.0-rc1`).
 

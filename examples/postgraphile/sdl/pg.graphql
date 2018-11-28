@@ -1,0 +1,2292 @@
+type Audio {
+  id: UUID!
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""
+A condition to be used against `Audio` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AudioCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `published` field."""
+  published: Boolean
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `uuid` field."""
+  uuid: UUID
+
+  """Checks for equality with the object’s `tags` field."""
+  tags: [String]
+
+  """Checks for equality with the object’s `uri` field."""
+  uri: String
+
+  """Checks for equality with the object’s `meta` field."""
+  meta: JSON
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `authorId` field."""
+  authorId: UUID
+}
+
+"""
+A filter to be used against `Audio` object types. All fields are combined with a logical ‘and.’
+"""
+input AudioFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `published` field."""
+  published: BooleanFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `uuid` field."""
+  uuid: UUIDFilter
+
+  """Filter by the object’s `tags` field."""
+  tags: StringListFilter
+
+  """Filter by the object’s `uri` field."""
+  uri: StringFilter
+
+  """Filter by the object’s `meta` field."""
+  meta: JSONFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `authorId` field."""
+  authorId: UUIDFilter
+
+  """Checks for all expressions in this list."""
+  and: [AudioFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [AudioFilter!]
+
+  """Negates the expression."""
+  not: AudioFilter
+}
+
+"""An input for mutations affecting `Audio`"""
+input AudioInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""A connection to a list of `Audio` values."""
+type AudiosConnection {
+  """A list of `Audio` objects."""
+  nodes: [Audio]!
+
+  """
+  A list of edges which contains the `Audio` and cursor to aid in pagination.
+  """
+  edges: [AudiosEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Audio` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Audio` edge in the connection."""
+type AudiosEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Audio` at the end of the edge."""
+  node: Audio
+}
+
+"""Methods to use when ordering `Audio`."""
+enum AudiosOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PUBLISHED_ASC
+  PUBLISHED_DESC
+  TITLE_ASC
+  TITLE_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  UUID_ASC
+  UUID_DESC
+  TAGS_ASC
+  TAGS_DESC
+  URI_ASC
+  URI_DESC
+  META_ASC
+  META_DESC
+  CREATED_ASC
+  CREATED_DESC
+  AUTHOR_ID_ASC
+  AUTHOR_ID_DESC
+}
+
+type Author implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  firstName: String
+  lastName: String
+
+  """Reads and enables pagination through a set of `Media`."""
+  mediasConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MediaCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MediaFilter
+  ): MediasConnection!
+
+  """Reads and enables pagination through a set of `Media`."""
+  medias(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MediaCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MediaFilter
+  ): [Media!]!
+}
+
+"""
+A condition to be used against `Author` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AuthorCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `firstName` field."""
+  firstName: String
+
+  """Checks for equality with the object’s `lastName` field."""
+  lastName: String
+}
+
+"""
+A filter to be used against `Author` object types. All fields are combined with a logical ‘and.’
+"""
+input AuthorFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `firstName` field."""
+  firstName: StringFilter
+
+  """Filter by the object’s `lastName` field."""
+  lastName: StringFilter
+
+  """Checks for all expressions in this list."""
+  and: [AuthorFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [AuthorFilter!]
+
+  """Negates the expression."""
+  not: AuthorFilter
+}
+
+"""An input for mutations affecting `Author`"""
+input AuthorInput {
+  id: UUID
+  firstName: String
+  lastName: String
+  medias: MediaAuthorInverseInput
+}
+
+"""
+Represents an update to a `Author`. Fields that are set will be updated.
+"""
+input AuthorPatch {
+  id: UUID
+  firstName: String
+  lastName: String
+}
+
+"""A connection to a list of `Author` values."""
+type AuthorsConnection {
+  """A list of `Author` objects."""
+  nodes: [Author]!
+
+  """
+  A list of edges which contains the `Author` and cursor to aid in pagination.
+  """
+  edges: [AuthorsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Author` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Author` edge in the connection."""
+type AuthorsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Author` at the end of the edge."""
+  node: Author
+}
+
+"""Methods to use when ordering `Author`."""
+enum AuthorsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  FIRST_NAME_ASC
+  FIRST_NAME_DESC
+  LAST_NAME_ASC
+  LAST_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+A filter to be used against Boolean fields. All fields are combined with a logical ‘and.’
+"""
+input BooleanFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Boolean
+
+  """Not equal to the specified value."""
+  notEqualTo: Boolean
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Boolean
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Boolean
+
+  """Included in the specified list."""
+  in: [Boolean!]
+
+  """Not included in the specified list."""
+  notIn: [Boolean!]
+}
+
+"""All input for the create `Audio` mutation."""
+input CreateAudioInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Audio` to be created by this mutation."""
+  audio: AudioInput!
+}
+
+"""The output of our create `Audio` mutation."""
+type CreateAudioPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Audio` that was created by this mutation."""
+  audio: Audio
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Audio`. May be used by Relay 1."""
+  audioEdge(
+    """The method to use when ordering `Audio`."""
+    orderBy: [AudiosOrderBy!] = NATURAL
+  ): AudiosEdge
+}
+
+"""All input for the create `Author` mutation."""
+input CreateAuthorInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Author` to be created by this mutation."""
+  author: AuthorInput!
+}
+
+"""The output of our create `Author` mutation."""
+type CreateAuthorPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Author` that was created by this mutation."""
+  author: Author
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = PRIMARY_KEY_ASC
+  ): AuthorsEdge
+}
+
+"""All input for the create `Document` mutation."""
+input CreateDocumentInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Document` to be created by this mutation."""
+  document: DocumentInput!
+}
+
+"""The output of our create `Document` mutation."""
+type CreateDocumentPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Document` that was created by this mutation."""
+  document: Document
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Document`. May be used by Relay 1."""
+  documentEdge(
+    """The method to use when ordering `Document`."""
+    orderBy: [DocumentsOrderBy!] = NATURAL
+  ): DocumentsEdge
+}
+
+"""All input for the create `Image` mutation."""
+input CreateImageInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Image` to be created by this mutation."""
+  image: ImageInput!
+}
+
+"""The output of our create `Image` mutation."""
+type CreateImagePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Image` that was created by this mutation."""
+  image: Image
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Image`. May be used by Relay 1."""
+  imageEdge(
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = NATURAL
+  ): ImagesEdge
+}
+
+"""All input for the create `Media` mutation."""
+input CreateMediaInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Media` to be created by this mutation."""
+  media: MediaInput!
+}
+
+"""The output of our create `Media` mutation."""
+type CreateMediaPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Media` that was created by this mutation."""
+  media: Media
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Author` that is related to this `Media`."""
+  author: Author
+
+  """An edge for our `Media`. May be used by Relay 1."""
+  mediaEdge(
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!] = PRIMARY_KEY_ASC
+  ): MediasEdge
+}
+
+"""All input for the create `Video` mutation."""
+input CreateVideoInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Video` to be created by this mutation."""
+  video: VideoInput!
+}
+
+"""The output of our create `Video` mutation."""
+type CreateVideoPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Video` that was created by this mutation."""
+  video: Video
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Video`. May be used by Relay 1."""
+  videoEdge(
+    """The method to use when ordering `Video`."""
+    orderBy: [VideosOrderBy!] = NATURAL
+  ): VideosEdge
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""
+A filter to be used against Datetime fields. All fields are combined with a logical ‘and.’
+"""
+input DatetimeFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: Datetime
+
+  """Not equal to the specified value."""
+  notEqualTo: Datetime
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: Datetime
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: Datetime
+
+  """Included in the specified list."""
+  in: [Datetime!]
+
+  """Not included in the specified list."""
+  notIn: [Datetime!]
+
+  """Less than the specified value."""
+  lessThan: Datetime
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: Datetime
+
+  """Greater than the specified value."""
+  greaterThan: Datetime
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: Datetime
+}
+
+"""All input for the `deleteAuthorById` mutation."""
+input DeleteAuthorByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""All input for the `deleteAuthor` mutation."""
+input DeleteAuthorInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Author` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Author` mutation."""
+type DeleteAuthorPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Author` that was deleted by this mutation."""
+  author: Author
+  deletedAuthorId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = PRIMARY_KEY_ASC
+  ): AuthorsEdge
+}
+
+"""All input for the `deleteMediaById` mutation."""
+input DeleteMediaByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  id: UUID!
+}
+
+"""All input for the `deleteMedia` mutation."""
+input DeleteMediaInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Media` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Media` mutation."""
+type DeleteMediaPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Media` that was deleted by this mutation."""
+  media: Media
+  deletedMediaId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Author` that is related to this `Media`."""
+  author: Author
+
+  """An edge for our `Media`. May be used by Relay 1."""
+  mediaEdge(
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!] = PRIMARY_KEY_ASC
+  ): MediasEdge
+}
+
+type Document {
+  id: UUID!
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""
+A condition to be used against `Document` object types. All fields are tested
+for equality and combined with a logical ‘and.’
+"""
+input DocumentCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `published` field."""
+  published: Boolean
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `uuid` field."""
+  uuid: UUID
+
+  """Checks for equality with the object’s `tags` field."""
+  tags: [String]
+
+  """Checks for equality with the object’s `uri` field."""
+  uri: String
+
+  """Checks for equality with the object’s `meta` field."""
+  meta: JSON
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `authorId` field."""
+  authorId: UUID
+}
+
+"""
+A filter to be used against `Document` object types. All fields are combined with a logical ‘and.’
+"""
+input DocumentFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `published` field."""
+  published: BooleanFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `uuid` field."""
+  uuid: UUIDFilter
+
+  """Filter by the object’s `tags` field."""
+  tags: StringListFilter
+
+  """Filter by the object’s `uri` field."""
+  uri: StringFilter
+
+  """Filter by the object’s `meta` field."""
+  meta: JSONFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `authorId` field."""
+  authorId: UUIDFilter
+
+  """Checks for all expressions in this list."""
+  and: [DocumentFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [DocumentFilter!]
+
+  """Negates the expression."""
+  not: DocumentFilter
+}
+
+"""An input for mutations affecting `Document`"""
+input DocumentInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""A connection to a list of `Document` values."""
+type DocumentsConnection {
+  """A list of `Document` objects."""
+  nodes: [Document]!
+
+  """
+  A list of edges which contains the `Document` and cursor to aid in pagination.
+  """
+  edges: [DocumentsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Document` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Document` edge in the connection."""
+type DocumentsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Document` at the end of the edge."""
+  node: Document
+}
+
+"""Methods to use when ordering `Document`."""
+enum DocumentsOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PUBLISHED_ASC
+  PUBLISHED_DESC
+  TITLE_ASC
+  TITLE_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  UUID_ASC
+  UUID_DESC
+  TAGS_ASC
+  TAGS_DESC
+  URI_ASC
+  URI_DESC
+  META_ASC
+  META_DESC
+  CREATED_ASC
+  CREATED_DESC
+  AUTHOR_ID_ASC
+  AUTHOR_ID_DESC
+}
+
+type Image {
+  id: UUID!
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""
+A condition to be used against `Image` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input ImageCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `published` field."""
+  published: Boolean
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `uuid` field."""
+  uuid: UUID
+
+  """Checks for equality with the object’s `tags` field."""
+  tags: [String]
+
+  """Checks for equality with the object’s `uri` field."""
+  uri: String
+
+  """Checks for equality with the object’s `meta` field."""
+  meta: JSON
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `authorId` field."""
+  authorId: UUID
+}
+
+"""
+A filter to be used against `Image` object types. All fields are combined with a logical ‘and.’
+"""
+input ImageFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `published` field."""
+  published: BooleanFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `uuid` field."""
+  uuid: UUIDFilter
+
+  """Filter by the object’s `tags` field."""
+  tags: StringListFilter
+
+  """Filter by the object’s `uri` field."""
+  uri: StringFilter
+
+  """Filter by the object’s `meta` field."""
+  meta: JSONFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `authorId` field."""
+  authorId: UUIDFilter
+
+  """Checks for all expressions in this list."""
+  and: [ImageFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [ImageFilter!]
+
+  """Negates the expression."""
+  not: ImageFilter
+}
+
+"""An input for mutations affecting `Image`"""
+input ImageInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""A connection to a list of `Image` values."""
+type ImagesConnection {
+  """A list of `Image` objects."""
+  nodes: [Image]!
+
+  """
+  A list of edges which contains the `Image` and cursor to aid in pagination.
+  """
+  edges: [ImagesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Image` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Image` edge in the connection."""
+type ImagesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Image` at the end of the edge."""
+  node: Image
+}
+
+"""Methods to use when ordering `Image`."""
+enum ImagesOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PUBLISHED_ASC
+  PUBLISHED_DESC
+  TITLE_ASC
+  TITLE_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  UUID_ASC
+  UUID_DESC
+  TAGS_ASC
+  TAGS_DESC
+  URI_ASC
+  URI_DESC
+  META_ASC
+  META_DESC
+  CREATED_ASC
+  CREATED_DESC
+  AUTHOR_ID_ASC
+  AUTHOR_ID_DESC
+}
+
+"""
+A JavaScript object encoded in the JSON format as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+A filter to be used against JSON fields. All fields are combined with a logical ‘and.’
+"""
+input JSONFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: JSON
+
+  """Not equal to the specified value."""
+  notEqualTo: JSON
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: JSON
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: JSON
+
+  """Included in the specified list."""
+  in: [JSON!]
+
+  """Not included in the specified list."""
+  notIn: [JSON!]
+
+  """Contains the specified JSON."""
+  contains: JSON
+
+  """Contained by the specified JSON."""
+  containedBy: JSON
+}
+
+type Media implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  id: UUID!
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+
+  """Reads a single `Author` that is related to this `Media`."""
+  author: Author
+}
+
+"""The fields on `author` to look up the row to connect."""
+input MediaAuthorAuthorConnectInput {
+  id: UUID!
+}
+
+"""The `author` to be created by this mutation."""
+input MediaAuthorAuthorCreateInput {
+  id: UUID
+  firstName: String
+  lastName: String
+  medias: MediaAuthorInverseInput
+}
+
+"""
+Input for the nested mutation of `author` in the `MediaInput` mutation.
+"""
+input MediaAuthorInput {
+  """The primary key(s) for `author` for the far side of the relationship."""
+  connect: MediaAuthorAuthorConnectInput
+
+  """
+  A `AuthorInput` object that will be created and connected to this object.
+  """
+  create: MediaAuthorAuthorCreateInput
+}
+
+"""
+Input for the nested mutation of `media` in the `AuthorInput` mutation.
+"""
+input MediaAuthorInverseInput {
+  """The primary key(s) for `media` for the far side of the relationship."""
+  connect: [MediaAuthorMediaConnectInput!]
+
+  """
+  A `MediaInput` object that will be created and connected to this object.
+  """
+  create: [MediaAuthorMediaCreateInput!]
+}
+
+"""The fields on `media` to look up the row to connect."""
+input MediaAuthorMediaConnectInput {
+  id: UUID!
+}
+
+"""The `media` to be created by this mutation."""
+input MediaAuthorMediaCreateInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  author: MediaAuthorInput
+}
+
+"""
+A condition to be used against `Media` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input MediaCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `published` field."""
+  published: Boolean
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `uuid` field."""
+  uuid: UUID
+
+  """Checks for equality with the object’s `tags` field."""
+  tags: [String]
+
+  """Checks for equality with the object’s `uri` field."""
+  uri: String
+
+  """Checks for equality with the object’s `meta` field."""
+  meta: JSON
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `authorId` field."""
+  authorId: UUID
+}
+
+"""
+A filter to be used against `Media` object types. All fields are combined with a logical ‘and.’
+"""
+input MediaFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `published` field."""
+  published: BooleanFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `uuid` field."""
+  uuid: UUIDFilter
+
+  """Filter by the object’s `tags` field."""
+  tags: StringListFilter
+
+  """Filter by the object’s `uri` field."""
+  uri: StringFilter
+
+  """Filter by the object’s `meta` field."""
+  meta: JSONFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `authorId` field."""
+  authorId: UUIDFilter
+
+  """Checks for all expressions in this list."""
+  and: [MediaFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [MediaFilter!]
+
+  """Negates the expression."""
+  not: MediaFilter
+}
+
+"""An input for mutations affecting `Media`"""
+input MediaInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+  author: MediaAuthorInput
+}
+
+"""
+Represents an update to a `Media`. Fields that are set will be updated.
+"""
+input MediaPatch {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""A connection to a list of `Media` values."""
+type MediasConnection {
+  """A list of `Media` objects."""
+  nodes: [Media]!
+
+  """
+  A list of edges which contains the `Media` and cursor to aid in pagination.
+  """
+  edges: [MediasEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Media` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Media` edge in the connection."""
+type MediasEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Media` at the end of the edge."""
+  node: Media
+}
+
+"""Methods to use when ordering `Media`."""
+enum MediasOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PUBLISHED_ASC
+  PUBLISHED_DESC
+  TITLE_ASC
+  TITLE_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  UUID_ASC
+  UUID_DESC
+  TAGS_ASC
+  TAGS_DESC
+  URI_ASC
+  URI_DESC
+  META_ASC
+  META_DESC
+  CREATED_ASC
+  CREATED_DESC
+  AUTHOR_ID_ASC
+  AUTHOR_ID_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Audio`."""
+  createAudio(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAudioInput!
+  ): CreateAudioPayload
+
+  """Creates a single `Author`."""
+  createAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAuthorInput!
+  ): CreateAuthorPayload
+
+  """Creates a single `Document`."""
+  createDocument(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateDocumentInput!
+  ): CreateDocumentPayload
+
+  """Creates a single `Image`."""
+  createImage(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateImageInput!
+  ): CreateImagePayload
+
+  """Creates a single `Media`."""
+  createMedia(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateMediaInput!
+  ): CreateMediaPayload
+
+  """Creates a single `Video`."""
+  createVideo(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateVideoInput!
+  ): CreateVideoPayload
+
+  """Updates a single `Author` using its globally unique id and a patch."""
+  updateAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuthorInput!
+  ): UpdateAuthorPayload
+
+  """Updates a single `Author` using a unique key and a patch."""
+  updateAuthorById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuthorByIdInput!
+  ): UpdateAuthorPayload
+
+  """Updates a single `Media` using its globally unique id and a patch."""
+  updateMedia(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMediaInput!
+  ): UpdateMediaPayload
+
+  """Updates a single `Media` using a unique key and a patch."""
+  updateMediaById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateMediaByIdInput!
+  ): UpdateMediaPayload
+
+  """Deletes a single `Author` using its globally unique id."""
+  deleteAuthor(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuthorInput!
+  ): DeleteAuthorPayload
+
+  """Deletes a single `Author` using a unique key."""
+  deleteAuthorById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuthorByIdInput!
+  ): DeleteAuthorPayload
+
+  """Deletes a single `Media` using its globally unique id."""
+  deleteMedia(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMediaInput!
+  ): DeleteMediaPayload
+
+  """Deletes a single `Media` using a unique key."""
+  deleteMediaById(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteMediaByIdInput!
+  ): DeleteMediaPayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Audio`."""
+  audiosConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Audio`."""
+    orderBy: [AudiosOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AudioCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AudioFilter
+  ): AudiosConnection
+
+  """Reads a set of `Audio`."""
+  audios(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Audio`."""
+    orderBy: [AudiosOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AudioCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AudioFilter
+  ): [Audio!]
+
+  """Reads and enables pagination through a set of `Author`."""
+  authorsConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AuthorFilter
+  ): AuthorsConnection
+
+  """Reads a set of `Author`."""
+  authors(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuthorCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: AuthorFilter
+  ): [Author!]
+
+  """Reads and enables pagination through a set of `Document`."""
+  documentsConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Document`."""
+    orderBy: [DocumentsOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DocumentCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: DocumentFilter
+  ): DocumentsConnection
+
+  """Reads a set of `Document`."""
+  documents(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Document`."""
+    orderBy: [DocumentsOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: DocumentCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: DocumentFilter
+  ): [Document!]
+
+  """Reads and enables pagination through a set of `Image`."""
+  imagesConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ImageCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ImageFilter
+  ): ImagesConnection
+
+  """Reads a set of `Image`."""
+  images(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Image`."""
+    orderBy: [ImagesOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: ImageCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: ImageFilter
+  ): [Image!]
+
+  """Reads and enables pagination through a set of `Media`."""
+  mediasConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MediaCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MediaFilter
+  ): MediasConnection
+
+  """Reads a set of `Media`."""
+  medias(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: MediaCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: MediaFilter
+  ): [Media!]
+
+  """Reads and enables pagination through a set of `Video`."""
+  videosConnection(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Video`."""
+    orderBy: [VideosOrderBy!] = [NATURAL]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: VideoCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: VideoFilter
+  ): VideosConnection
+
+  """Reads a set of `Video`."""
+  videos(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Skip the first `n` values."""
+    offset: Int
+
+    """The method to use when ordering `Video`."""
+    orderBy: [VideosOrderBy!]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: VideoCondition
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: VideoFilter
+  ): [Video!]
+  authorById(id: UUID!): Author
+  mediaById(id: UUID!): Media
+
+  """Reads a single `Author` using its globally unique `ID`."""
+  author(
+    """The globally unique `ID` to be used in selecting a single `Author`."""
+    nodeId: ID!
+  ): Author
+
+  """Reads a single `Media` using its globally unique `ID`."""
+  media(
+    """The globally unique `ID` to be used in selecting a single `Media`."""
+    nodeId: ID!
+  ): Media
+}
+
+"""
+A filter to be used against String fields. All fields are combined with a logical ‘and.’
+"""
+input StringFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: String
+
+  """Not equal to the specified value."""
+  notEqualTo: String
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: String
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: String
+
+  """Included in the specified list."""
+  in: [String!]
+
+  """Not included in the specified list."""
+  notIn: [String!]
+
+  """Less than the specified value."""
+  lessThan: String
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: String
+
+  """Greater than the specified value."""
+  greaterThan: String
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: String
+
+  """Contains the specified string (case-sensitive)."""
+  includes: String
+
+  """Does not contain the specified string (case-sensitive)."""
+  notIncludes: String
+
+  """Contains the specified string (case-insensitive)."""
+  includesInsensitive: String
+
+  """Does not contain the specified string (case-insensitive)."""
+  notIncludesInsensitive: String
+
+  """Starts with the specified string (case-sensitive)."""
+  startsWith: String
+
+  """Does not start with the specified string (case-sensitive)."""
+  notStartsWith: String
+
+  """Starts with the specified string (case-insensitive)."""
+  startsWithInsensitive: String
+
+  """Does not start with the specified string (case-insensitive)."""
+  notStartsWithInsensitive: String
+
+  """Ends with the specified string (case-sensitive)."""
+  endsWith: String
+
+  """Does not end with the specified string (case-sensitive)."""
+  notEndsWith: String
+
+  """Ends with the specified string (case-insensitive)."""
+  endsWithInsensitive: String
+
+  """Does not end with the specified string (case-insensitive)."""
+  notEndsWithInsensitive: String
+
+  """
+  Matches the specified pattern (case-sensitive). An underscore (_) matches any
+  single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  like: String
+
+  """
+  Does not match the specified pattern (case-sensitive). An underscore (_)
+  matches any single character; a percent sign (%) matches any sequence of zero
+  or more characters.
+  """
+  notLike: String
+
+  """
+  Matches the specified pattern (case-insensitive). An underscore (_) matches
+  any single character; a percent sign (%) matches any sequence of zero or more characters.
+  """
+  likeInsensitive: String
+
+  """
+  Does not match the specified pattern (case-insensitive). An underscore (_)
+  matches any single character; a percent sign (%) matches any sequence of zero
+  or more characters.
+  """
+  notLikeInsensitive: String
+
+  """
+  Matches the specified pattern using the SQL standard's definition of a regular expression.
+  """
+  similarTo: String
+
+  """
+  Does not match the specified pattern using the SQL standard's definition of a regular expression.
+  """
+  notSimilarTo: String
+}
+
+"""
+A filter to be used against String List fields. All fields are combined with a logical ‘and.’
+"""
+input StringListFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: [String]
+
+  """Not equal to the specified value."""
+  notEqualTo: [String]
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: [String]
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: [String]
+
+  """Any array item is equal to the specified value."""
+  anyEqualTo: String
+
+  """Any array item is not equal to the specified value."""
+  anyNotEqualTo: String
+
+  """Less than the specified value."""
+  lessThan: [String]
+
+  """Less than or equal to the specified value."""
+  lessThanOrEqualTo: [String]
+
+  """Greater than the specified value."""
+  greaterThan: [String]
+
+  """Greater than or equal to the specified value."""
+  greaterThanOrEqualTo: [String]
+
+  """Any array item is less than the specified value."""
+  anyLessThan: String
+
+  """Any array item is less than or equal to the specified value."""
+  anyLessThanOrEqualTo: String
+
+  """Any array item is greater than the specified value."""
+  anyGreaterThan: String
+
+  """Any array item is greater than or equal to the specified value."""
+  anyGreaterThanOrEqualTo: String
+}
+
+"""All input for the `updateAuthorById` mutation."""
+input UpdateAuthorByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Author` being updated.
+  """
+  authorPatch: AuthorPatch!
+  id: UUID!
+}
+
+"""All input for the `updateAuthor` mutation."""
+input UpdateAuthorInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Author` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Author` being updated.
+  """
+  authorPatch: AuthorPatch!
+}
+
+"""The output of our update `Author` mutation."""
+type UpdateAuthorPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Author` that was updated by this mutation."""
+  author: Author
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Author`. May be used by Relay 1."""
+  authorEdge(
+    """The method to use when ordering `Author`."""
+    orderBy: [AuthorsOrderBy!] = PRIMARY_KEY_ASC
+  ): AuthorsEdge
+}
+
+"""All input for the `updateMediaById` mutation."""
+input UpdateMediaByIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Media` being updated.
+  """
+  mediaPatch: MediaPatch!
+  id: UUID!
+}
+
+"""All input for the `updateMedia` mutation."""
+input UpdateMediaInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Media` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Media` being updated.
+  """
+  mediaPatch: MediaPatch!
+}
+
+"""The output of our update `Media` mutation."""
+type UpdateMediaPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Media` that was updated by this mutation."""
+  media: Media
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Author` that is related to this `Media`."""
+  author: Author
+
+  """An edge for our `Media`. May be used by Relay 1."""
+  mediaEdge(
+    """The method to use when ordering `Media`."""
+    orderBy: [MediasOrderBy!] = PRIMARY_KEY_ASC
+  ): MediasEdge
+}
+
+"""
+A universally unique identifier as defined by [RFC 4122](https://tools.ietf.org/html/rfc4122).
+"""
+scalar UUID
+
+"""
+A filter to be used against UUID fields. All fields are combined with a logical ‘and.’
+"""
+input UUIDFilter {
+  """
+  Is null (if `true` is specified) or is not null (if `false` is specified).
+  """
+  isNull: Boolean
+
+  """Equal to the specified value."""
+  equalTo: UUID
+
+  """Not equal to the specified value."""
+  notEqualTo: UUID
+
+  """
+  Not equal to the specified value, treating null like an ordinary value.
+  """
+  distinctFrom: UUID
+
+  """Equal to the specified value, treating null like an ordinary value."""
+  notDistinctFrom: UUID
+
+  """Included in the specified list."""
+  in: [UUID!]
+
+  """Not included in the specified list."""
+  notIn: [UUID!]
+}
+
+type Video {
+  id: UUID!
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""
+A condition to be used against `Video` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input VideoCondition {
+  """Checks for equality with the object’s `id` field."""
+  id: UUID
+
+  """Checks for equality with the object’s `published` field."""
+  published: Boolean
+
+  """Checks for equality with the object’s `title` field."""
+  title: String
+
+  """Checks for equality with the object’s `description` field."""
+  description: String
+
+  """Checks for equality with the object’s `uuid` field."""
+  uuid: UUID
+
+  """Checks for equality with the object’s `tags` field."""
+  tags: [String]
+
+  """Checks for equality with the object’s `uri` field."""
+  uri: String
+
+  """Checks for equality with the object’s `meta` field."""
+  meta: JSON
+
+  """Checks for equality with the object’s `created` field."""
+  created: Datetime
+
+  """Checks for equality with the object’s `authorId` field."""
+  authorId: UUID
+}
+
+"""
+A filter to be used against `Video` object types. All fields are combined with a logical ‘and.’
+"""
+input VideoFilter {
+  """Filter by the object’s `id` field."""
+  id: UUIDFilter
+
+  """Filter by the object’s `published` field."""
+  published: BooleanFilter
+
+  """Filter by the object’s `title` field."""
+  title: StringFilter
+
+  """Filter by the object’s `description` field."""
+  description: StringFilter
+
+  """Filter by the object’s `uuid` field."""
+  uuid: UUIDFilter
+
+  """Filter by the object’s `tags` field."""
+  tags: StringListFilter
+
+  """Filter by the object’s `uri` field."""
+  uri: StringFilter
+
+  """Filter by the object’s `meta` field."""
+  meta: JSONFilter
+
+  """Filter by the object’s `created` field."""
+  created: DatetimeFilter
+
+  """Filter by the object’s `authorId` field."""
+  authorId: UUIDFilter
+
+  """Checks for all expressions in this list."""
+  and: [VideoFilter!]
+
+  """Checks for any expressions in this list."""
+  or: [VideoFilter!]
+
+  """Negates the expression."""
+  not: VideoFilter
+}
+
+"""An input for mutations affecting `Video`"""
+input VideoInput {
+  id: UUID
+  published: Boolean
+  title: String
+  description: String
+  uuid: UUID
+  tags: [String]
+  uri: String
+  meta: JSON
+  created: Datetime
+  authorId: UUID
+}
+
+"""A connection to a list of `Video` values."""
+type VideosConnection {
+  """A list of `Video` objects."""
+  nodes: [Video]!
+
+  """
+  A list of edges which contains the `Video` and cursor to aid in pagination.
+  """
+  edges: [VideosEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Video` you could get from the connection."""
+  totalCount: Int
+}
+
+"""A `Video` edge in the connection."""
+type VideosEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Video` at the end of the edge."""
+  node: Video
+}
+
+"""Methods to use when ordering `Video`."""
+enum VideosOrderBy {
+  NATURAL
+  ID_ASC
+  ID_DESC
+  PUBLISHED_ASC
+  PUBLISHED_DESC
+  TITLE_ASC
+  TITLE_DESC
+  DESCRIPTION_ASC
+  DESCRIPTION_DESC
+  UUID_ASC
+  UUID_DESC
+  TAGS_ASC
+  TAGS_DESC
+  URI_ASC
+  URI_DESC
+  META_ASC
+  META_DESC
+  CREATED_ASC
+  CREATED_DESC
+  AUTHOR_ID_ASC
+  AUTHOR_ID_DESC
+}

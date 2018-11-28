@@ -1,19 +1,62 @@
 name: media
 
 services:
+  # PostgreSQL
   db:
     type: postgres
-    install_dependencies_as_root:
-      - apt-get update
-      - apt-get install sudo
-      - adduser www-data sudo
-      - echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-    install_dependencies_as_me:
-      - echo "db:5432:media:media:media" > ~/.pgpass
-    run:
-      - '[ ! -e "$HOME/.schema-imported" ] && psql -d media -U media < /app/db/schema.sql && touch "$HOME/.schema-imported"'
-    portforward: 5555
+    portforward: 5432
     creds:
       user: media
       password: media
       database: media
+
+  # Back Media GraphQL server (PostGraphile)
+  media:
+    type: node
+    install_dependencies_as_root:
+      - apt-get update
+      - apt-get install -y postgresql-client
+    install_dependencies_as_me:
+      - npm i -g yarn
+      - yarn global add pm2@latest
+      - yarn install
+    command: yarn start:postgraphile
+    run:
+      - node commands/schema.js --enable-uuid
+      - yarn command:schema
+      - yarn command:seed --authors 10 --metas 10 --media 10
+    overrides:
+      services:
+        image: node:10
+        depends_on:
+          - db
+        environment:
+          NODE_ENV: "development"
+          # echo '{"pg":[{"username":"hh","password":"hh","host":"db","query":{"is_master":true},"path":"hh","scheme":"public","port":5432}]}' | base64
+          PLATFORM_RELATIONSHIPS: "eyJwZyI6W3sidXNlcm5hbWUiOiJtZWRpYSIsInBhc3N3b3JkIjoibWVkaWEiLCJob3N0IjoiZGIiLCJxdWVyeSI6eyJpc19tYXN0ZXIiOnRydWV9LCJwYXRoIjoibWVkaWEiLCJzY2hlbWUiOiJwdWJsaWMiLCJwb3J0Ijo1NDMyfV19Cg=="
+          # Service port.
+          PORT: 80
+
+  # Front Media GraphQL server (Apollo via Grizzly)
+  front:
+    type: node
+    install_dependencies_as_me:
+      - npm i -g yarn
+      - yarn global add pm2@latest
+      - yarn install
+    command: yarn start
+    overrides:
+      services:
+        image: node:10
+        depends_on:
+          - media
+        environment:
+          NODE_ENV: "development"
+          # Service port.
+          PORT: 80
+
+tooling:
+  yarn:
+    service: media
+    cmd: yarn
+    description: Run yarn commands inside the app

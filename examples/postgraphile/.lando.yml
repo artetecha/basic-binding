@@ -50,6 +50,8 @@ services:
         image: node:10
         depends_on:
           - media
+        volumes:
+          - "/app/run"
         environment:
           NODE_ENV: "development"
           # Service port.
